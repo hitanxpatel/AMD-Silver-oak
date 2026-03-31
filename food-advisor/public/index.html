@@ -3,33 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food & Health Advisor</title>
+    <title>AI Food & Health Advisor</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Food & Health Advisor</h1>
-        <div class="search-box">
-            <input type="text" id="foodInput" placeholder="Enter food name (e.g. Apple)">
-            <button id="analyzeBtn" onclick="analyzeFood()">Analyze</button>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-logo">
+            <i class="fas fa-leaf"></i> NutriMind AI
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#tips-section">Daily Tips</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="header-section">
+            <h1><i class="fas fa-robot"></i> AI Food Analyzer</h1>
+            <p>Enter any food or meal, and our AI will provide instant nutritional insights and recommendations.</p>
         </div>
         
+        <div class="search-box">
+            <div class="input-group">
+                <i class="fas fa-search"></i>
+                <input type="text" id="foodInput" placeholder="What are you eating? (e.g. Avocado Toast)">
+            </div>
+            <button id="analyzeBtn" onclick="analyzeFood()">
+                <span>Analyze Food</span>
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+        
+        <div id="loader" class="loader-container hidden">
+            <div class="spinner"></div>
+            <p>AI is analyzing your food...</p>
+        </div>
+
         <div id="resultCard" class="result-card hidden">
-            <h2 id="resultTitle">Result</h2>
-            <div class="stat-row">
-                <span class="label">Calories:</span>
-                <span id="resCalories" class="value"></span>
+            <div class="card-header">
+                <h2 id="resultTitle">Result</h2>
+                <span id="foodEmoji" class="emoji-badge">🍽️</span>
             </div>
-            <div class="stat-row">
-                <span class="label">Health Status:</span>
-                <span id="resStatus" class="value"></span>
+            
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <i class="fas fa-fire"></i>
+                    <span class="label">Est. Calories</span>
+                    <span id="resCalories" class="value">-- kcal</span>
+                </div>
+                <div class="metric-box status-box" id="statusContainer">
+                    <i class="fas fa-heartbeat"></i>
+                    <span class="label">Health Rating</span>
+                    <span id="resStatus" class="value status-badge">--</span>
+                </div>
             </div>
-            <div class="stat-row">
-                <span class="label">Suggestion:</span>
-                <span id="resSuggestion" class="value"></span>
+
+            <div class="suggestion-box">
+                <p id="resSuggestion" class="suggestion-text">--</p>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Diet Tips Section -->
+    <section id="tips-section" class="tips-section">
+        <h2>💡 Daily Wellness Tips</h2>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <i class="fas fa-tint"></i>
+                <h3>Stay Hydrated</h3>
+                <p>Drink at least 8 glasses of water a day to boost your metabolism and maintain energy.</p>
+            </div>
+            <div class="tip-card">
+                <i class="fas fa-apple-alt"></i>
+                <h3>Eat Colors</h3>
+                <p>A colorful plate ensures you're getting a wide variety of essential vitamins and minerals.</p>
+            </div>
+            <div class="tip-card">
+                <i class="fas fa-walking"></i>
+                <h3>Move Often</h3>
+                <p>Combine a balanced diet with at least 30 minutes of physical activity daily.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 NutriMind AI Food Advisor. Created for demonstrative heuristic analysis.</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,6 +1,10 @@
 async function analyzeFood() {
     const inputField = document.getElementById('foodInput');
     const analyzeBtn = document.getElementById('analyzeBtn');
+    const btnText = analyzeBtn.querySelector('span');
+    const loader = document.getElementById('loader');
+    const resultCard = document.getElementById('resultCard');
+    
     const foodName = inputField.value.trim();
 
     if (!foodName) {
@@ -8,9 +12,11 @@ async function analyzeFood() {
         return;
     }
 
-    // Loader effect
-    analyzeBtn.innerText = "Analyzing...";
+    // Toggle loader
+    btnText.innerText = "Analyzing...";
     analyzeBtn.disabled = true;
+    resultCard.classList.add('hidden');
+    loader.classList.remove('hidden');
 
     try {
         const response = await fetch('/analyze', {
@@ -23,22 +29,41 @@ async function analyzeFood() {
 
         const data = await response.json();
 
-        // Update UI
-        document.getElementById('resultTitle').innerText = 
-            foodName.charAt(0).toUpperCase() + foodName.slice(1).toLowerCase();
-        
-        document.getElementById('resCalories').innerText = data.calories;
-        document.getElementById('resStatus').innerText = data.status;
-        document.getElementById('resSuggestion').innerText = data.suggestion;
+        // Simulate a tiny delay to show the "AI thinking" effect naturally
+        setTimeout(() => {
+            // Update UI elements
+            document.getElementById('resultTitle').innerText = data.food;
+            document.getElementById('foodEmoji').innerText = data.emoji || '🍽️';
+            document.getElementById('resCalories').innerText = data.calories + ' kcal';
+            document.getElementById('resStatus').innerText = data.status;
+            document.getElementById('resSuggestion').innerText = data.suggestion;
 
-        // Show result card
-        document.getElementById('resultCard').classList.remove('hidden');
+            // Handle status coloring
+            const statusContainer = document.getElementById('statusContainer');
+            statusContainer.className = 'metric-box status-box'; // Reset classes
+            
+            if (data.status === 'Healthy') {
+                statusContainer.classList.add('status-green');
+            } else if (data.status === 'Moderate') {
+                statusContainer.classList.add('status-yellow');
+            } else if (data.status === 'Unhealthy') {
+                statusContainer.classList.add('status-red');
+            }
+
+            // Hide loader and show result
+            loader.classList.add('hidden');
+            resultCard.classList.remove('hidden');
+        }, 800);
+
     } catch (error) {
         console.error("Error analyzing food:", error);
         alert("An error occurred while analyzing the food.");
+        loader.classList.add('hidden');
     } finally {
-        analyzeBtn.innerText = "Analyze";
-        analyzeBtn.disabled = false;
+        setTimeout(() => {
+            btnText.innerText = "Analyze Food";
+            analyzeBtn.disabled = false;
+        }, 800);
     }
 }
 
