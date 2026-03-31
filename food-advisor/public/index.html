@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food & Health Advisor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Food & Health Advisor</h1>
+        <div class="search-box">
+            <input type="text" id="foodInput" placeholder="Enter food name (e.g. Apple)">
+            <button id="analyzeBtn" onclick="analyzeFood()">Analyze</button>
+        </div>
+        
+        <div id="resultCard" class="result-card hidden">
+            <h2 id="resultTitle">Result</h2>
+            <div class="stat-row">
+                <span class="label">Calories:</span>
+                <span id="resCalories" class="value"></span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Health Status:</span>
+                <span id="resStatus" class="value"></span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Suggestion:</span>
+                <span id="resSuggestion" class="value"></span>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
